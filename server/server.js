@@ -30,7 +30,7 @@ APP.post("/update-sensor", (req, res) => {
 
     sensorData.push(req.body);
 
-    return res.status(204)  //OK
+    return res.status(200)  //OK
 
     /*let response = {};
     response = { status: "OK" };
