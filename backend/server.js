@@ -4,13 +4,13 @@ import express from 'express';
 
 // #region Variables
 const APP = express();
-const PORT = 2022;
+const PORT = 2023;
 let sensorData = [];
 // #endregion
 
 // #region EXPRESS CODE
 // ---------------------------------------
-APP.use("/", express.static("../client/dashboard"));
+APP.use("/", express.static("../frontend/dashboard"));
 
 /* ---ACTIVATE MIDDLEWARE--- */
 APP.use(express.json());

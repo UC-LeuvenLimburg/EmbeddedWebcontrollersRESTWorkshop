@@ -7,7 +7,7 @@ const char *ssid = "EmbeddedLabo";
 const char *password = "3w73t5vIdPgW";
 
 // Your Domain name with URL path or IP address with path
-const char *serverName = "http://192.168.0.4:2022/update-sensor";
+const char *serverName = "http://192.168.0.4:2023/update-sensor";
 
 // the following variables are unsigned longs because the time, measured in
 // milliseconds, will quickly become a bigger number than can be stored in an int.
@@ -69,5 +69,5 @@ void loop()
       Serial.println("WiFi Disconnected");
     }
     lastTime = millis();
-    }
+  }
 }
