@@ -3,11 +3,11 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char *ssid = "EmbeddedLabo";
-const char *password = "3w73t5vIdPgW";
+const char *ssid = "TP-Link_42C4";
+const char *password = "66243359";
 
 // Your Domain name with URL path or IP address with path
-const char *serverName = "http://192.168.0.4:2023/update-sensor";
+const char *serverName = "http://192.168.0.103:2023/update-sensor";
 
 // the following variables are unsigned longs because the time, measured in
 // milliseconds, will quickly become a bigger number than can be stored in an int.
@@ -51,12 +51,12 @@ void loop()
       DynamicJsonDocument doc(1024);
       doc["temperature"] = random(-15, 40);
       doc["humidity"] = random(0, 100);
-      String mesage = "";
-      serializeJson(doc, mesage);
+      String message = "";
+      serializeJson(doc, message);
 
       // HTTP request with a content type: application/json
       http.addHeader("Content-Type", "application/json");
-      int httpResponseCode = http.POST(mesage);
+      int httpResponseCode = http.POST(message);
 
       Serial.print("HTTP Response code: ");
       Serial.println(httpResponseCode);

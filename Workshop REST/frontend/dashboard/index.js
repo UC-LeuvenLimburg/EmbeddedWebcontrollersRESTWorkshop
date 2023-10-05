@@ -1,6 +1,6 @@
 console.log('Javascript file works');
-const getData = ()=>{
-    fetch("http://localhost:2023/getData")
+const getData = async ()=>{
+    await fetch("http://localhost:2023/getData")
         .then(request => request.json())
         .then(data => {
             console.log(data);

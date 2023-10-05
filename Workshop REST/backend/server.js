@@ -10,7 +10,7 @@ let sensorData = [];
 
 // #region EXPRESS CODE
 // ---------------------------------------
-APP.use("/", express.static("../frontend/dashboard"));
+APP.use("/embedded", express.static("../frontend/dashboard"));
 
 /* ---ACTIVATE MIDDLEWARE--- */
 APP.use(express.json());
@@ -24,6 +24,7 @@ APP.get("/getData", (req, res) => {
 //http://192.168.0.4:2022/update-sensor
 APP.post("/update-sensor", (req, res) => {
     console.log("Full data: ", req.body)
+    // const temp = req.body.temperature
     const { temperature, humidity } = req.body;
     console.log("temperature: ", temperature);
     console.log("humidity: ", humidity);
@@ -31,10 +32,6 @@ APP.post("/update-sensor", (req, res) => {
     sensorData.push(req.body);
 
     return res.status(200)  //OK
-
-    /*let response = {};
-    response = { status: "OK" };
-    return res.send(JSON.stringify(response));*/
 });
 
 
