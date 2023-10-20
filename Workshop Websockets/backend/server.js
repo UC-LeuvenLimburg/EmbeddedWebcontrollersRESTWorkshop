@@ -4,6 +4,7 @@ import { WebSocketServer } from 'ws';
 const PORT = 3000;
 const APP = express();
 const WSS = new WebSocketServer({ port: 8080 });
+const sensorData = [];
 
 // #region WEBSERVER
 // ---------------------------------------
@@ -17,9 +18,14 @@ APP.use("/embedded", express.static("../frontend/dashboard"));
 /* ---ACTIVATE MIDDLEWARE--- */
 APP.use(express.json());
 
+
 /* ---ENDPOINTS--- */
 APP.get("/getData", (req, res) => {
-    res.send(JSON.stringify(sensorData));
+    let newData=[];
+    sensorData.forEach(data=>{
+        newData.push(data.temperature)
+    });
+    res.send(JSON.stringify(newData));
 });
 
 //http://192.168.0.4:2022/update-sensor
@@ -29,7 +35,20 @@ APP.post("/update-sensor", (req, res) => {
     console.log("temperature: ", temperature);
     console.log("humidity: ", humidity);
     sensorData.push(req.body);
-    return res.status(200)  //OK
+
+    WSS.on('connection', ws => {
+        console.log('New client connected!')
+        ws.send(humidity)
+
+        ws.on('close', () => {
+            console.log('Client has disconnected!')
+        })
+        
+        ws.onerror =  () => {
+            console.log('websocket error')
+        }
+    })
+    return res.status(200).send()  //OK
 });
 // ---------------------------------------
 // #endregion
@@ -42,13 +61,6 @@ WSS.on('connection', ws => {
 
     ws.on('close', () => {
         console.log('Client has disconnected!')
-    })
-
-    ws.on('message', data => {
-        WSS.clients.forEach(client => {
-            console.log(`distributing message: ${data}`)
-            client.send(`${data}`)
-        })
     })
     
     ws.onerror =  () => {

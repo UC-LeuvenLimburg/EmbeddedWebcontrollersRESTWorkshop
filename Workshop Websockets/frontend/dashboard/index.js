@@ -1,9 +1,12 @@
 console.log('Javascript file works');
 const getData = async ()=>{
-    await fetch("http://localhost:2023/getData")
+    await fetch("http://localhost:3000/getData")
         .then(request => request.json())
         .then(data => {
-            console.log(data);
+          data.map(waarde=>{
+            let templateString = `<tr>${waarde}</tr>`
+            document.querySelector('#temperatureTable').innerHTML += templateString
+          })
         });
 }
 

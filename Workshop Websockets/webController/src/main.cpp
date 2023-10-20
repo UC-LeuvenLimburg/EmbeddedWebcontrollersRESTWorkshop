@@ -7,7 +7,7 @@ const char *ssid = "TP-Link_42C4";
 const char *password = "66243359";
 
 // Your Domain name with URL path or IP address with path
-const char *serverName = "http://192.168.0.103:2023/update-sensor";
+const char *serverName = "http://192.168.0.104:3000/update-sensor";
 
 // the following variables are unsigned longs because the time, measured in
 // milliseconds, will quickly become a bigger number than can be stored in an int.
